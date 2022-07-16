@@ -1,4 +1,4 @@
-#include "antivirus.h"
+#include "../include/antivirus.h"
 
 unsigned int Antivirus::init(unsigned int options){
      unsigned int signo = 0, result = 0;

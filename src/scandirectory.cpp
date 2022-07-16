@@ -1,4 +1,4 @@
-#include "scandirectory.h"
+#include "../include/scandirectory.h"
 #include "ui_scandirectory.h"
 
 ScanDirectory::ScanDirectory(QWidget *parent) :

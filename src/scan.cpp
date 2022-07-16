@@ -1,4 +1,4 @@
-#include "scan.h"
+#include "../include/scan.h"
 #include "ui_scanfile.h"
 
 ScanFile::ScanFile(QWidget *parent) :

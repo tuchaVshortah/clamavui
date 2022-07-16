@@ -1,4 +1,4 @@
-#include "clamsettings.h"
+#include "../include/clamsettings.h"
 
 ClamSettings::ClamSettings()
 {
