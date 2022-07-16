@@ -11,7 +11,6 @@ CONFIG += c++17 console warn_on
 SOURCES += \
     src/analysis.cpp \
     src/antivirus.cpp \
-    src/clamsettings.cpp \
     src/clamui.cpp \
     src/history.cpp \
     src/network.cpp \
@@ -29,7 +28,6 @@ SOURCES += \
 HEADERS += \
     include/analysis.h \
     include/antivirus.h \
-    include/clamsettings.h \
     include/clamui.h \
     include/history.h \
     include/network.h \
