@@ -1,4 +1,4 @@
-#include "../include/analysis.h"
+#include "analysis.h"
 #include "ui_analysis.h"
 
 Analysis::Analysis(QWidget *parent) :

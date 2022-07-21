@@ -1,4 +1,4 @@
-#include "../include/schedule.h"
+#include "schedule.h"
 #include "ui_schedule.h"
 
 Schedule::Schedule(QWidget *parent) :

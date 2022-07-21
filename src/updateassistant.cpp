@@ -1,4 +1,4 @@
-#include "../include/updateassistant.h"
+#include "updateassistant.h"
 #include "ui_updateassistant.h"
 
 UpdateAssistant::UpdateAssistant(QWidget *parent) :

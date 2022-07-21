@@ -2,6 +2,8 @@
 #define UPDATE_H
 
 #include <QDialog>
+#include <QMessageBox>
+#include "antivirus.h"
 
 namespace Ui {
 class Update;
@@ -19,6 +21,8 @@ private slots:
     void on_buttonBox_accepted();
 
     void on_buttonBox_rejected();
+
+    void on_checkUpdates_clicked();
 
 private:
     Ui::Update *ui;

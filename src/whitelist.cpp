@@ -1,4 +1,4 @@
-#include "../include/whitelist.h"
+#include "whitelist.h"
 #include "ui_whitelist.h"
 
 Whitelist::Whitelist(QWidget *parent) :

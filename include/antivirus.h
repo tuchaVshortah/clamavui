@@ -4,7 +4,17 @@
 #include <QObject>
 #include <QThread>
 #include <QtConcurrent>
-#include <clamav.h>
+#include "clamav.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "libfreshclam.h"
+
+#ifdef __cplusplus
+}
+#endif
 
 class Antivirus: public QObject
 {
@@ -15,6 +25,7 @@ public:
     Antivirus(const Antivirus&);
     Antivirus(unsigned int options);
     ~Antivirus();
+    static unsigned int updateSigs();
 signals:
     void resultReady(unsigned int value);
 private:

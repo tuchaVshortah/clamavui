@@ -1,4 +1,4 @@
-#include "../include/clamui.h"
+#include "clamui.h"
 #include "ui_clamui.h"
 
 

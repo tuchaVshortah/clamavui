@@ -1,5 +1,5 @@
-#include "../include/scan.h"
-#include "ui_scanfile.h"
+#include "scan.h"
+#include "ui_scan.h"
 
 ScanFile::ScanFile(QWidget *parent) :
     QDialog(parent),

@@ -1,4 +1,4 @@
-#include "../include/update.h"
+#include "update.h"
 #include "ui_update.h"
 
 Update::Update(QWidget *parent) :
@@ -22,5 +22,15 @@ void Update::on_buttonBox_accepted()
 void Update::on_buttonBox_rejected()
 {
     hide();
+}
+
+void Update::on_checkUpdates_clicked()
+{
+    //Perform default updates
+    fc_error_t result;
+    fc_config config;
+    if (FC_SUCCESS != Antivirus::updateSigs()) {
+        QMessageBox::warning(this, tr("Error"), tr("Update failed"));
+    }
 }
 

@@ -1,4 +1,4 @@
-#include "../include/history.h"
+#include "history.h"
 #include "ui_history.h"
 
 History::History(QWidget *parent) :

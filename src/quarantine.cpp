@@ -1,4 +1,4 @@
-#include "../include/quarantine.h"
+#include "quarantine.h"
 #include "ui_quarantine.h"
 
 Quarantine::Quarantine(QWidget *parent) :

@@ -1,4 +1,4 @@
-#include "../include/setup.h"
+#include "setup.h"
 
 int result = 0;
 unsigned int signo = 0;

@@ -1,4 +1,4 @@
-#include "../include/antivirus.h"
+#include "antivirus.h"
 
 unsigned int Antivirus::init(unsigned int options){
      unsigned int signo = 0, result = 0;
@@ -33,4 +33,14 @@ Antivirus::Antivirus(const Antivirus& clamav){
 
 Antivirus::~Antivirus(){
     cl_engine_free(engine);
+}
+
+unsigned int Antivirus::updateSigs() {
+    //Perform default updates
+    fc_error_t result;
+    fc_config config;
+
+    result = fc_initialize(&config);
+
+    return result;
 }
