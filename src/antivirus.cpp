@@ -35,12 +35,14 @@ Antivirus::~Antivirus(){
     cl_engine_free(engine);
 }
 
-unsigned int Antivirus::updateSigs() {
+ActionReply Antivirus::updateSigs() {
     //Perform default updates
     fc_error_t result;
     fc_config config;
 
-    result = fc_initialize(&config);
+    QFuture<fc_error_t> future = QtConcurrent::run(fc_initialize, &config);
 
     return result;
 }
+
+cl_engine *Antivirus::engine = nullptr;

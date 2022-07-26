@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QThread>
 #include <QtConcurrent>
+#include <KAuth/ActionReply>
+#include <KAuth/HelperSupport>
 #include "clamav.h"
 
 #ifdef __cplusplus
@@ -16,6 +18,8 @@ extern "C" {
 }
 #endif
 
+using namespace KAuth;
+
 class Antivirus: public QObject
 {
     Q_OBJECT
@@ -25,7 +29,7 @@ public:
     Antivirus(const Antivirus&);
     Antivirus(unsigned int options);
     ~Antivirus();
-    static unsigned int updateSigs();
+    static ActionReply updateSigs();
 signals:
     void resultReady(unsigned int value);
 private:

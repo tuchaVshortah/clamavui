@@ -1,5 +1,4 @@
 #include "clamui.h"
-
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
