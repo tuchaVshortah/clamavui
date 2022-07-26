@@ -1,0 +1,5 @@
+[org.tuchaVshortah.clamavui.updatesigs]
+Name=Update antivirus signatures
+Description=Attempting to update local antivirus signatures
+Policy=auth_admin
+Persistence=session
