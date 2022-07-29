@@ -8,6 +8,7 @@
 #include <KAuth/HelperSupport>
 #include "clamav.h"
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -29,13 +30,12 @@ public:
     Antivirus(const Antivirus&);
     Antivirus(unsigned int options);
     ~Antivirus();
-    static ActionReply updateSigs();
+    ActionReply updatesigs();
 signals:
     void resultReady(unsigned int value);
 private:
-    static unsigned int init(unsigned int options);
-    static cl_engine *engine;
-
+    cl_engine *engine = nullptr;
+    fc_config config;
 };
 
 #endif // ANTIVIRUS_H

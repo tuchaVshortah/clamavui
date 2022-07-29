@@ -2,7 +2,14 @@
 #define UPDATE_H
 
 #include <QDialog>
+#include <QString>
+#include <QTextEdit>
+#include <QFile>
+#include <QTextStream>
 #include <QMessageBox>
+#include <KAuth/Action>
+#include <KAuth/ActionReply>
+#include <KAuth/ExecuteJob>
 #include "antivirus.h"
 
 namespace Ui {
@@ -24,8 +31,13 @@ private slots:
 
     void on_checkUpdates_clicked();
 
+    void on_updates();
+
 private:
     Ui::Update *ui;
+    QString logs = "/var/log/clamav/freshclam.log";
+
+    void readLogs();
 };
 
 #endif // UPDATE_H

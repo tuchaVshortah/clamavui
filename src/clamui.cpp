@@ -113,8 +113,5 @@ void ClamUI::on_scanDirectoryButton_clicked()
 
 
 void ClamUI::on_scanSystemButton_clicked(){
-
-    for(const auto &file: std::filesystem::directory_iterator(home.toStdString())){
-        //needs defintion
-    }
+    hide();
 }

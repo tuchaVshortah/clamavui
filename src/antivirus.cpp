@@ -1,11 +1,13 @@
 #include "antivirus.h"
 
-unsigned int Antivirus::init(unsigned int options){
-     unsigned int signo = 0, result = 0;
+Antivirus::Antivirus(): Antivirus(CL_INIT_DEFAULT) {}
+
+Antivirus::Antivirus(unsigned int options) {
+    unsigned int signo = 0, result = 0;
     if((result = cl_init(CL_INIT_DEFAULT)) != CL_SUCCESS){
-        return result;
+        emit resultReady(result);
     }else if(!(engine = cl_engine_new())){
-        return CL_ERROR;
+        emit resultReady(CL_ERROR);
     }else if((result = cl_load(cl_retdbdir(), engine, &signo, options)) != CL_SUCCESS){
          cl_engine_free(engine);
     }else if((result = cl_engine_compile(engine)) != CL_SUCCESS) {
@@ -13,36 +15,26 @@ unsigned int Antivirus::init(unsigned int options){
     }else if ((result = cl_engine_compile(engine)) != CL_SUCCESS) {
         cl_engine_free(engine);
     }
-    return result;
+    emit resultReady(result);
 }
 
-Antivirus::Antivirus()
-{
-    QFuture<unsigned int> future = QtConcurrent::run(init, CL_INIT_DEFAULT);
-    emit resultReady(future.result());
-}
-
-Antivirus::Antivirus(unsigned int options){
-    QFuture<unsigned int> future = QtConcurrent::run(init, options);
-    emit resultReady(future.result());
-}
-
-Antivirus::Antivirus(const Antivirus& clamav){
+Antivirus::Antivirus(const Antivirus& clamav) {
     engine = clamav.engine;
 }
 
-Antivirus::~Antivirus(){
+Antivirus::~Antivirus() {
     cl_engine_free(engine);
 }
 
-ActionReply Antivirus::updateSigs() {
+ActionReply Antivirus::updatesigs() {
     //Perform default updates
-    fc_error_t result;
-    fc_config config;
+    ActionReply reply;
 
-    QFuture<fc_error_t> future = QtConcurrent::run(fc_initialize, &config);
+    fc_error_t result = fc_initialize(&config);
 
-    return result;
+    reply.addData("result", result);
+
+    return reply;
 }
 
-cl_engine *Antivirus::engine = nullptr;
+KAUTH_HELPER_MAIN("org.tuchavshortah.clamavui.antivirus", Antivirus)
