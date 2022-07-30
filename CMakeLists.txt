@@ -27,6 +27,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 
+
 include(ECMInstallIcons)
 include(ECMQtDeclareLoggingCategory)
 include(FeatureSummary)
@@ -35,6 +36,7 @@ find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(KF5Auth)
 find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} REQUIRED COMPONENTS Concurrent Gui)
 find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Widgets)
+
 
 find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     ConfigWidgets
@@ -45,12 +47,6 @@ find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     XmlGui
 )
-
-#set(KDE_INSTALL_DBUSSYSTEMSERVICEDIR "${CMAKE_INSTALL_BINDIR}")
-
-
-
-
 
 add_executable(clamavui MACOSX_BUNDLE
     forms/analysis.ui
@@ -100,7 +96,6 @@ target_include_directories(clamavui PRIVATE
 )
 
 
-
 target_link_libraries(clamavui PRIVATE
     KF5::Auth
     KF5::AuthCore
@@ -108,6 +103,7 @@ target_link_libraries(clamavui PRIVATE
     Qt::Core
     Qt::Gui
 )
+
 
 if((QT_VERSION_MAJOR GREATER 4))
     target_link_libraries(clamavui PRIVATE
@@ -123,6 +119,7 @@ if(UNIX AND NOT MACOS)
     )
 endif()
 
+
 install(TARGETS clamavui
     BUNDLE DESTINATION .
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -134,6 +131,7 @@ add_executable(antivirus
     include/antivirus.h
     src/antivirus.cpp
 )
+
 
 target_include_directories(antivirus PRIVATE
     /usr/include
@@ -156,7 +154,9 @@ if(UNIX AND NOT MACOS)
     )
 endif()
 
+
 install(TARGETS antivirus DESTINATION ${KAUTH_HELPER_INSTALL_DIR})
+
 
 kauth_install_helper_files(antivirus org.tuchavshortah.clamavui.antivirus root)
 kauth_install_actions(org.tuchavshortah.clamavui.antivirus org.tuchavshortah.clamavui.antivirus.actions)
@@ -167,4 +167,6 @@ kauth_install_actions(org.tuchavshortah.clamavui.antivirus org.tuchavshortah.cla
 ki18n_install(po)
 kdoctools_install(po)
 
+
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+

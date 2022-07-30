@@ -1,4 +1,4 @@
-[org.tuchaVshortah.clamavui.antivirus.updatesigs]
+[org.tuchavshortah.clamavui.antivirus.updatesigs]
 Name=Update antivirus signatures
 Description=Attempting to update local antivirus signatures
 Policy=auth_admin
