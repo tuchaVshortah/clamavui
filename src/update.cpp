@@ -32,12 +32,19 @@ void Update::on_checkUpdates_clicked()
 
     ExecuteJob *job = updateAction.execute();
 
-    connect(job, &KJob::result, this, &Update::on_updates);
+    connect(job, &ExecuteJob::result, this, &Update::on_updates);
     job->start();
 }
 
-void Update::on_updates(){
-    readLogs();
+void Update::on_updates(KJob *kjob){
+    KAuth::ExecuteJob *job = (KAuth::ExecuteJob *)kjob;
+    if(job->error()){
+        QMessageBox::critical(this, tr("Something bad happened"), tr("Error: ") + job->errorText().toStdString().c_str());
+    } else if(job->data()["init_result"].toUInt() != CL_SUCCESS){
+        QMessageBox::warning(this, tr("Libclamav error"), cl_strerror(job->data()["init_result"].toUInt()));
+    } else if(job->data()["update_result"].toUInt() != FC_SUCCESS){
+        QMessageBox::warning(this, tr("Libfreshclam error"), tr("Error: ") + fc_strerror(static_cast<fc_error_t>(job->data()["update_result"].toInt())));
+    }
 }
 
 void Update::readLogs(){

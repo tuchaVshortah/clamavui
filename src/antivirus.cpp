@@ -1,21 +1,19 @@
 #include "antivirus.h"
 
-Antivirus::Antivirus(): Antivirus(CL_INIT_DEFAULT) {}
-
 Antivirus::Antivirus(unsigned int options) {
-    unsigned int signo = 0, result = 0;
-    if((result = cl_init(CL_INIT_DEFAULT)) != CL_SUCCESS){
-        emit resultReady(result);
-    }else if(!(engine = cl_engine_new())){
-        emit resultReady(CL_ERROR);
-    }else if((result = cl_load(cl_retdbdir(), engine, &signo, options)) != CL_SUCCESS){
-         cl_engine_free(engine);
-    }else if((result = cl_engine_compile(engine)) != CL_SUCCESS) {
-         cl_engine_free(engine);
-    }else if ((result = cl_engine_compile(engine)) != CL_SUCCESS) {
+
+
+    init_result = cl_init(CL_INIT_DEFAULT);
+
+    if(!(init_result != CL_SUCCESS) && !(engine = cl_engine_new())){
+        init_result = CL_ERROR;
+    }else if((init_result = cl_load(cl_retdbdir(), engine, &signo, options)) != CL_SUCCESS){
+        cl_engine_free(engine);
+    }else if((init_result = cl_engine_compile(engine)) != CL_SUCCESS) {
+        cl_engine_free(engine);
+    }else if ((init_result = cl_engine_compile(engine)) != CL_SUCCESS) {
         cl_engine_free(engine);
     }
-    emit resultReady(result);
 }
 
 Antivirus::Antivirus(const Antivirus& clamav) {
@@ -30,9 +28,12 @@ ActionReply Antivirus::updatesigs() {
     //Perform default updates
     ActionReply reply;
 
-    fc_error_t result = fc_initialize(&config);
+    if(init_result == CL_SUCCESS) {
+        update_result = fc_initialize(&config);
+    }
 
-    reply.addData("result", result);
+    reply.addData("init_result", init_result);
+    reply.addData("update_result", update_result);
 
     return reply;
 }

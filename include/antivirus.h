@@ -26,16 +26,15 @@ class Antivirus: public QObject
     Q_OBJECT
 
 public:
-    Antivirus();
     Antivirus(const Antivirus&);
-    Antivirus(unsigned int options);
+    Antivirus(unsigned int options=CL_INIT_DEFAULT);
     ~Antivirus();
     ActionReply updatesigs();
-signals:
-    void resultReady(unsigned int value);
 private:
     cl_engine *engine = nullptr;
     fc_config config;
+    fc_error_t update_result;
+    unsigned int signo = 0, init_result = 0;
 };
 
 #endif // ANTIVIRUS_H

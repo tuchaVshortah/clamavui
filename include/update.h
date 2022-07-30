@@ -11,7 +11,6 @@
 #include <KAuth/ActionReply>
 #include <KAuth/ExecuteJob>
 #include "antivirus.h"
-
 namespace Ui {
 class Update;
 }
@@ -31,7 +30,7 @@ private slots:
 
     void on_checkUpdates_clicked();
 
-    void on_updates();
+    void on_updates(KJob *kjob);
 
 private:
     Ui::Update *ui;

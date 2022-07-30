@@ -34,6 +34,7 @@ include(FeatureSummary)
 
 find_package(QT NAMES Qt5 Qt6 REQUIRED COMPONENTS Core)
 find_package(KF5Auth)
+find_package(KF5CoreAddons)
 find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} REQUIRED COMPONENTS Concurrent Gui)
 find_package(Qt${QT_VERSION_MAJOR} ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Widgets)
 
@@ -141,10 +142,17 @@ target_include_directories(antivirus PRIVATE
 target_link_libraries(antivirus PRIVATE
     KF5::Auth
     KF5::AuthCore
+    KF5::CoreAddons
     Qt::Concurrent
     Qt::Core
     Qt::Gui
 )
+
+if((QT_VERSION_MAJOR GREATER 4))
+    target_link_libraries(antivirus PRIVATE
+        Qt::Widgets
+    )
+endif()
 
 if(UNIX AND NOT MACOS)
     target_link_libraries(antivirus PRIVATE
